@@ -51,10 +51,10 @@
         android:layout_marginEnd="16dp"/>
 
     <EditText
-        android:id="@+id/edit_text_shop_email"
+        android:id="@+id/edit_text_shop_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email Address"
+        android:hint="Shop Phone Number"
         android:singleLine="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"/>
