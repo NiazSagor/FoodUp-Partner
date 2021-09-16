@@ -1,10 +1,13 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.duodevloopers.fooduppartner.R
+import com.duodevloopers.fooduppartner.clicklisteners.ServiceOnClickListener
+import com.duodevloopers.fooduppartner.model.ServiceOrder
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 

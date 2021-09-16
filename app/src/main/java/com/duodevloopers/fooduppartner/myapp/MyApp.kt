@@ -1,6 +1,7 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.myapp
 
 import android.app.Application
+import com.duodevloopers.fooduppartner.model.Partner
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

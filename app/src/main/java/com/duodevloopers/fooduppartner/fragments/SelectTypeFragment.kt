@@ -1,4 +1,4 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.fragments
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.duodevloopers.fooduppartner.R
+import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_select_type.*
 
 

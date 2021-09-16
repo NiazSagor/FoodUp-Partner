@@ -1,4 +1,4 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.model
 
 class Partner(
     private var details: String,

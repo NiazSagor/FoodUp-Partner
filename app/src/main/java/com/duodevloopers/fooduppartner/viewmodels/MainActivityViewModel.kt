@@ -1,6 +1,7 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.viewmodels
 
 import androidx.lifecycle.ViewModel
+import com.duodevloopers.fooduppartner.model.Partner
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivityViewModel : ViewModel {

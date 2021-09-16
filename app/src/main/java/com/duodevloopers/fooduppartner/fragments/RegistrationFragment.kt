@@ -1,4 +1,4 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.duodevloopers.fooduppartner.R
+import com.duodevloopers.fooduppartner.model.Partner
+import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_select_type.*
 

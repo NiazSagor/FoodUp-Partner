@@ -1,16 +1,21 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.model
 
-class ServiceOrder(
+class FoodOrder(
+    private var building: String,
     private var cost: String,
     private var done: Boolean,
     private var id: String,
-    private var link: String,
-    private var page: Double,
+    private var item: String,
     private var paid: Boolean,
-    private var timestamp: String,
-    private var type: String
-
+    private var timestamp: String
 ) {
+
+    fun getBuilding(): String {
+        return building
+    }
+
+
+    fun getItems(): List<String> = item.split("#")
 
     fun getCost(): String {
         return cost
@@ -20,16 +25,9 @@ class ServiceOrder(
         return done
     }
 
-    fun getLink(): String {
-        return link
-    }
 
     fun getId(): String {
         return id
-    }
-
-    fun getPage(): Int {
-        return page.toInt()
     }
 
     fun isPaid(): Boolean {
@@ -39,10 +37,4 @@ class ServiceOrder(
     fun getTimestamp(): String {
         return timestamp
     }
-
-    fun getType(): String {
-        return type
-    }
-
-
 }

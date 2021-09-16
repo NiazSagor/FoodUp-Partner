@@ -1,4 +1,4 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.callbacks
 
 import com.google.firebase.firestore.DocumentReference
 

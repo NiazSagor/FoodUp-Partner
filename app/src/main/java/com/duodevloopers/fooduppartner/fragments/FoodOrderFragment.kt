@@ -1,4 +1,4 @@
-package com.duodevloopers.fooduppartner
+package com.duodevloopers.fooduppartner.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,20 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.duodevloopers.fooduppartner.R
+import com.duodevloopers.fooduppartner.bottomsheets.OrderDetailsBottomSheet
+import com.duodevloopers.fooduppartner.callbacks.OrderDetailsBottomSheetInteractionCallback
+import com.duodevloopers.fooduppartner.callbacks.ShopLoadCallback
+import com.duodevloopers.fooduppartner.model.FoodOrder
+import com.duodevloopers.fooduppartner.model.ServiceOrder
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import kotlinx.android.synthetic.main.fragment_service_order.*
 
+class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetInteractionCallback {
 
-class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListener {
+    private lateinit var orderDetailsBottomSheet: OrderDetailsBottomSheet
 
     private lateinit var shopLoadCallback: ShopLoadCallback
-
-    private lateinit var adapter: ServiceOrderAdapter
 
     private lateinit var documentReference: DocumentReference
 
@@ -38,57 +42,27 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
             .addOnFailureListener(OnFailureListener {
                 shopLoadCallback.onFailure()
             })
+
+        orderDetailsBottomSheet = OrderDetailsBottomSheet(requireContext(), this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_service_order, container, false)
+        return inflater.inflate(R.layout.fragment_food_order, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
     }
 
-    override fun onSuccess(databaseReference: DocumentReference) {
-
-        documentReference = databaseReference
-
-        val query: Query = databaseReference.collection("orders")
-            .whereEqualTo("done", false).orderBy("timestamp")
-
-        val options = FirestoreRecyclerOptions.Builder<ServiceOrder>()
-            .setQuery(query, ServiceOrder::class.java)
-            .build()
-
-        adapter = ServiceOrderAdapter(options)
-        order_list.adapter = adapter
-        adapter.setOnClickListener(this)
+    override fun onClick(items: List<String>) {
+        // todo open bottom sheet and pass items
     }
 
-    override fun onFailure() {
-        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        adapter.stopListening()
-    }
-
-    override fun onOpenLink(link: String) {
-
-    }
-
-    override fun onMarkDone(model: ServiceOrder) {
+    override fun onOrderReady(model: FoodOrder) {
         documentReference.collection("orders")
             .document(model.getId())
             .update("done", true)
@@ -97,5 +71,38 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
                     .show()
             })
     }
+
+    override fun onCancel() {
+
+    }
+
+    override fun onSuccess(databaseReference: DocumentReference) {
+        documentReference = databaseReference
+
+        // todo make index in db
+        val query: Query = databaseReference.collection("orders")
+            .whereEqualTo("done", false).orderBy("timestamp")
+
+        val options = FirestoreRecyclerOptions.Builder<ServiceOrder>()
+            .setQuery(query, ServiceOrder::class.java)
+            .build()
+
+        //todo make adapter for food order same as service order adapter
+    }
+
+    override fun onFailure() {
+        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+//        adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+//        adapter.stopListening()
+    }
+
 
 }
