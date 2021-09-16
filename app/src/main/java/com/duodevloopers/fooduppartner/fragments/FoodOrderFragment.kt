@@ -10,6 +10,7 @@ import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.bottomsheets.OrderDetailsBottomSheet
 import com.duodevloopers.fooduppartner.callbacks.OrderDetailsBottomSheetInteractionCallback
 import com.duodevloopers.fooduppartner.callbacks.ShopLoadCallback
+import com.duodevloopers.fooduppartner.clicklisteners.FoodOrderOnClickListener
 import com.duodevloopers.fooduppartner.model.FoodOrder
 import com.duodevloopers.fooduppartner.model.ServiceOrder
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -19,7 +20,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetInteractionCallback {
+class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetInteractionCallback,
+    FoodOrderOnClickListener {
 
     private lateinit var orderDetailsBottomSheet: OrderDetailsBottomSheet
 
@@ -58,23 +60,6 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 
     }
 
-    override fun onClick(items: List<String>) {
-        // todo open bottom sheet and pass items
-    }
-
-    override fun onOrderReady(model: FoodOrder) {
-        documentReference.collection("orders")
-            .document(model.getId())
-            .update("done", true)
-            .addOnSuccessListener(OnSuccessListener {
-                Toast.makeText(requireContext(), "Order is marked as completed", Toast.LENGTH_SHORT)
-                    .show()
-            })
-    }
-
-    override fun onCancel() {
-
-    }
 
     override fun onSuccess(databaseReference: DocumentReference) {
         documentReference = databaseReference
@@ -104,5 +89,24 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 //        adapter.stopListening()
     }
 
+    override fun onClick(model: FoodOrder) {
+        orderDetailsBottomSheet.showBottomSheet(model)
+    }
+
+    // from bottom sheet
+    override fun onOrderReady(model: FoodOrder) {
+        documentReference.collection("orders")
+            .document(model.getId())
+            .update("done", true)
+            .addOnSuccessListener(OnSuccessListener {
+                Toast.makeText(requireContext(), "Order is marked as completed", Toast.LENGTH_SHORT)
+                    .show()
+            })
+    }
+
+    // from bottom sheet
+    override fun onCancel() {
+        orderDetailsBottomSheet.hideBottomSheet()
+    }
 
 }
