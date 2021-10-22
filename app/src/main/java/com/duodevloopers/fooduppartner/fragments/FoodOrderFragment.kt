@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.duodevloopers.fooduppartner.R
+import com.duodevloopers.fooduppartner.adapter.FoodOrderAdapter
+import com.duodevloopers.fooduppartner.adapter.ServiceOrderAdapter
 import com.duodevloopers.fooduppartner.bottomsheets.OrderDetailsBottomSheet
 import com.duodevloopers.fooduppartner.callbacks.OrderDetailsBottomSheetInteractionCallback
 import com.duodevloopers.fooduppartner.callbacks.ShopLoadCallback
@@ -19,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.fragment_service_order.*
 
 class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetInteractionCallback,
     FoodOrderOnClickListener {
@@ -28,6 +31,8 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
     private lateinit var shopLoadCallback: ShopLoadCallback
 
     private lateinit var documentReference: DocumentReference
+
+    private lateinit var adapter: FoodOrderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,11 +73,14 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
         val query: Query = databaseReference.collection("orders")
             .whereEqualTo("done", false).orderBy("timestamp")
 
-        val options = FirestoreRecyclerOptions.Builder<ServiceOrder>()
-            .setQuery(query, ServiceOrder::class.java)
+        val options = FirestoreRecyclerOptions.Builder<FoodOrder>()
+            .setQuery(query, FoodOrder::class.java)
             .build()
 
         //todo make adapter for food order same as service order adapter
+        adapter = FoodOrderAdapter(options)
+        order_list.adapter = adapter
+        adapter.setOnClickListener(this)
     }
 
     override fun onFailure() {

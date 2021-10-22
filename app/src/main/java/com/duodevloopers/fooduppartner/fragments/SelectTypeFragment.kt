@@ -47,6 +47,17 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
             stationary.setBackground(null)
         }
 
+        teacher.setOnClickListener {
+            model.setType("teacher")
+            teacher.setBackground(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.selected
+                )
+            )
+            teacher.setBackground(null)
+        }
+
         next_button.setOnClickListener {
             val action =
                 SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()

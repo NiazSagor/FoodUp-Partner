@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity_nav_graph"
-    app:startDestination="@id/selectTypeFragment">
+    app:startDestination="@id/teacherHomeFragment">
 
     <fragment
         android:id="@+id/selectTypeFragment"
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_selectTypeFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_selectTypeFragment_to_teacherLogin"
+            app:destination="@id/teacherLogin" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -24,4 +27,43 @@
         android:name="com.duodevloopers.fooduppartner.fragments.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/teacherRegistration"
+        android:name="com.duodevloopers.fooduppartner.fragments.TeacherRegistration"
+        android:label="teacher_registration"
+        tools:layout="@layout/teacher_registration" />
+    <fragment
+        android:id="@+id/teacherLogin"
+        android:name="com.duodevloopers.fooduppartner.fragments.TeacherLogin"
+        android:label="teacher_login"
+        tools:layout="@layout/teacher_login" >
+        <action
+            android:id="@+id/action_teacherLogin_to_teacherRegistration"
+            app:destination="@id/teacherRegistration" />
+        <action
+            android:id="@+id/action_teacherLogin_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherHomeFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.TeacherHomeFragment"
+        android:label="fragment_teacher_home"
+        tools:layout="@layout/fragment_teacher_home" >
+        <action
+            android:id="@+id/action_teacherHomeFragment_to_createAttendanceFragment"
+            app:destination="@id/createAttendanceFragment" />
+        <action
+            android:id="@+id/action_teacherHomeFragment_to_createCrFragment"
+            app:destination="@id/createCrFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCrFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.CreateCrFragment"
+        android:label="fragment_create_cr"
+        tools:layout="@layout/fragment_create_cr" />
+    <fragment
+        android:id="@+id/createAttendanceFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.CreateAttendanceFragment"
+        android:label="fragment_create_attendance"
+        tools:layout="@layout/fragment_create_attendance" />
 </navigation>
