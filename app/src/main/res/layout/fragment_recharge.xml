@@ -4,43 +4,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp"
-    tools:context=".fragments.CreateAttendanceFragment">
+    tools:context=".fragments.RechargeFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Attendance Information"
+        android:text="Recharge Info"
         android:textSize="24sp"
         android:textColor="@color/black"
         android:layout_margin="8dp"/>
 
     <EditText
-        android:id="@+id/course_code"
+        android:id="@+id/id_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="Course Code"/>
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="ID Number"/>
 
     <EditText
-        android:id="@+id/course_title"
+        android:id="@+id/recharge_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="Course Title"/>
+        android:hint="Recharge Amount"/>
+
 
     <EditText
-        android:id="@+id/section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Section"/>
-
-    <EditText
-        android:id="@+id/date_of_attendance"
+        android:id="@+id/recharge_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,17 +48,8 @@
         android:focusableInTouchMode="false"
         android:hint="Date"/>
 
-    <EditText
-        android:id="@+id/number_of_class"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:inputType="number"
-        android:hint="Number of Class"/>
-
     <Button
-        android:id="@+id/create_attendance"
+        android:id="@+id/create_recharge_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -70,7 +58,7 @@
         android:text="Create"/>
 
     <ImageView
-        android:id="@+id/qr_code"
+        android:id="@+id/qr_code_recharge"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:scaleType="fitCenter"
@@ -82,8 +70,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Scan the QR code to make your attendance"
+        android:text="Scan the QR code to recharge point"
         android:textSize="14sp"
         android:layout_margin="16dp"/>
+
 
 </LinearLayout>
