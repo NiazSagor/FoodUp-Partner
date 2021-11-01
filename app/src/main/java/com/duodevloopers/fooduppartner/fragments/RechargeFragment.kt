@@ -61,9 +61,6 @@ class RechargeFragment : Fragment(R.layout.fragment_recharge) {
             ).show()
         }
 
-        id_number.setOnClickListener {
-            scanCode()
-        }
 
         create_recharge_button.setOnClickListener {
             createQRCode()
@@ -76,10 +73,12 @@ class RechargeFragment : Fragment(R.layout.fragment_recharge) {
             recharge_amount.text.toString() == ""
             ||
             recharge_date.text.toString() == ""
+            ||
+            id_number.text.toString() == ""
         ) {
             Toast.makeText(requireContext(), "Fields must not be empty", Toast.LENGTH_SHORT).show()
         } else {
-            val qrCode = id_number.text.toString().trim() +"/"+ recharge_amount.text.toString().trim()
+            val qrCode = id_number.text.toString().trim() +"/"+ recharge_amount.text.toString().trim() +"/"+ recharge_date.text.toString().trim()
             Log.d(TAG, "createQRCode: "+qrCode)
             val writer = QRCodeWriter()
             try {
@@ -94,37 +93,6 @@ class RechargeFragment : Fragment(R.layout.fragment_recharge) {
             }
         }
 
-    }
-
-    private fun scanCode() {
-        val intentIntegrator = IntentIntegrator(requireActivity())
-        intentIntegrator.setCaptureActivity(CaptureAct::class.java)
-        intentIntegrator.setOrientationLocked(true)
-        intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
-        intentIntegrator.setPrompt("Scanning Barcode from Your Student ID Card")
-        intentIntegrator.initiateScan()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (intentResult != null) {
-            if (intentResult.contents != null) {
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setTitle("Scanning Result")
-                builder.setMessage(intentResult.contents)
-                builder.setPositiveButton(
-                    "Scan Again"
-                ) { dialogInterface, i -> scanCode() }.setNegativeButton(
-                    "Ok"
-                ) { dialogInterface, i -> id_number.setText(intentResult.contents) }
-                val dialog = builder.create()
-                dialog.show()
-            } else {
-                Toast.makeText(requireContext(), "No Results", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
     }
 
     private fun updateLabel() {
