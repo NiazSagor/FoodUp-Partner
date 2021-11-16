@@ -12,46 +12,50 @@
         android:text="Recharge Info"
         android:textSize="24sp"
         android:textColor="@color/black"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp" />
 
-    <EditText
-        android:id="@+id/id_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="ID Number"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
 
-    <EditText
-        android:id="@+id/recharge_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Recharge Amount"/>
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/id_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="ID Number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
+
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/recharge_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Recharge Amount" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/recharge_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="false"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:hint="Date"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
 
-    <Button
-        android:id="@+id/create_recharge_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Create"/>
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/recharge_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <ImageView
         android:id="@+id/qr_code_recharge"
@@ -60,7 +64,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/cast_album_art_placeholder"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:layout_width="match_parent"
@@ -68,7 +72,16 @@
         android:gravity="center"
         android:text="Scan the QR code to recharge point"
         android:textSize="14sp"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/create_recharge_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Create" />
 
 
 </LinearLayout>

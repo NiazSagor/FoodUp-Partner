@@ -12,7 +12,6 @@ import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.model.Partner
 import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_registration.*
-import kotlinx.android.synthetic.main.fragment_select_type.*
 
 class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnClickListener {
 
@@ -34,7 +33,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
                 .start()
         }
 
-        next_button.setOnClickListener(this)
+//        next_button.setOnClickListener(this)
 
     }
 
@@ -67,6 +66,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
                     model.getType()
                 )
             )
+
+            // TODO: 16/11/2021 go to dashboard
 
             Toast.makeText(requireContext(), "Registration Completed", Toast.LENGTH_SHORT).show()
         }

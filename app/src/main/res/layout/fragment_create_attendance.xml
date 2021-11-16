@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp"
     tools:context=".fragments.CreateAttendanceFragment">
 
     <TextView
@@ -13,61 +12,73 @@
         android:text="Attendance Information"
         android:textSize="24sp"
         android:textColor="@color/black"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp" />
 
-    <EditText
-        android:id="@+id/course_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Course Code"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
 
-    <EditText
-        android:id="@+id/course_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Course Title"/>
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/course_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Code" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="Section"/>
 
-    <EditText
-        android:id="@+id/date_of_attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:clickable="false"
-        android:cursorVisible="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:hint="Date"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
 
-    <EditText
-        android:id="@+id/number_of_class"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:inputType="number"
-        android:hint="Number of Class"/>
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/course_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Course Title" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/create_attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Create"/>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
+
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Section" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
+
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/date_of_attendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/parent"
+        android:layout_marginTop="@dimen/loginViewsMargin">
+
+        <EditText
+            style="@style/modifiedEditText"
+            android:id="@+id/number_of_class"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Number of Class" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/qr_code"
@@ -76,7 +87,16 @@
         android:scaleType="fitCenter"
         android:src="@drawable/cast_album_art_placeholder"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="32dp" />
+
+    <Button
+        android:id="@+id/create_attendance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Create" />
 
     <TextView
         android:layout_width="match_parent"
@@ -84,6 +104,6 @@
         android:gravity="center"
         android:text="Scan the QR code to make your attendance"
         android:textSize="14sp"
-        android:layout_margin="16dp"/>
+        android:layout_margin="16dp" />
 
 </LinearLayout>
