@@ -12,6 +12,8 @@ class ServiceOrder(
 
 ) {
 
+    constructor() : this("", false, "", "", 0.00, false, "", "")
+
     fun getCost(): String {
         return cost
     }
@@ -36,13 +38,16 @@ class ServiceOrder(
         return paid
     }
 
-    fun getTimestamp(): String {
-        return timestamp
+    fun getTimestamp(): Long {
+        return timestamp.toLong()
     }
 
     fun getType(): String {
         return type
     }
 
+    override fun toString(): String {
+        return super.toString()
+    }
 
 }

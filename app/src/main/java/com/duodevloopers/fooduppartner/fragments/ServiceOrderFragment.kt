@@ -1,6 +1,9 @@
 package com.duodevloopers.fooduppartner.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_service_order.*
 
 class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListener {
 
+    private val TAG = "ServiceOrderFragment"
+
     private lateinit var shopLoadCallback: ShopLoadCallback
 
     private lateinit var adapter: ServiceOrderAdapter
@@ -35,7 +40,7 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
 
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document("")
+            .document("21CHxdPcqDZOhT2xsQpi")
             .get()
             .addOnSuccessListener(OnSuccessListener {
                 shopLoadCallback.onSuccess(it.reference)
@@ -65,7 +70,7 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
 
         // todo make index in db
         val query: Query = databaseReference.collection("orders")
-            .whereEqualTo("done", false).orderBy("timestamp")
+            .whereEqualTo("done", false)
 
         val options = FirestoreRecyclerOptions.Builder<ServiceOrder>()
             .setQuery(query, ServiceOrder::class.java)
@@ -73,16 +78,12 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
 
         adapter = ServiceOrderAdapter(options)
         order_list.adapter = adapter
+        adapter.startListening()
         adapter.setOnClickListener(this)
     }
 
     override fun onFailure() {
         Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        adapter.startListening()
     }
 
     override fun onStop() {
@@ -91,7 +92,18 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
     }
 
     override fun onOpenLink(link: String) {
+        Log.d(TAG, "onOpenLink: " + link)
 
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(browserIntent)
+
+//        PdfViewerActivity.launchPdfFromUrl(
+//            requireActivity(),
+//            link,
+//            "File",
+//            "",                  // If nothing specific, Put "" it will save to Downloads
+//            enableDownload = true
+//        )
     }
 
     override fun onMarkDone(model: ServiceOrder) {

@@ -8,13 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.adapter.FoodOrderAdapter
-import com.duodevloopers.fooduppartner.adapter.ServiceOrderAdapter
 import com.duodevloopers.fooduppartner.bottomsheets.OrderDetailsBottomSheet
 import com.duodevloopers.fooduppartner.callbacks.OrderDetailsBottomSheetInteractionCallback
 import com.duodevloopers.fooduppartner.callbacks.ShopLoadCallback
 import com.duodevloopers.fooduppartner.clicklisteners.FoodOrderOnClickListener
 import com.duodevloopers.fooduppartner.model.FoodOrder
-import com.duodevloopers.fooduppartner.model.ServiceOrder
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -41,7 +39,7 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document("")
+            .document("q3Uvg4piInWxRBC8ChrC")
             .get()
             .addOnSuccessListener(OnSuccessListener {
                 shopLoadCallback.onSuccess(it.reference)
@@ -71,7 +69,7 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 
         // todo make index in db
         val query: Query = databaseReference.collection("orders")
-            .whereEqualTo("done", false).orderBy("timestamp")
+            .whereEqualTo("done", false)
 
         val options = FirestoreRecyclerOptions.Builder<FoodOrder>()
             .setQuery(query, FoodOrder::class.java)
@@ -80,6 +78,7 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
         //todo make adapter for food order same as service order adapter
         adapter = FoodOrderAdapter(options)
         order_list.adapter = adapter
+        adapter.startListening()
         adapter.setOnClickListener(this)
     }
 
@@ -89,12 +88,11 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 
     override fun onStart() {
         super.onStart()
-//        adapter.startListening()
     }
 
     override fun onStop() {
         super.onStop()
-//        adapter.stopListening()
+        adapter.stopListening()
     }
 
     override fun onClick(model: FoodOrder) {

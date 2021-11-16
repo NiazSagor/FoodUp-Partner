@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.clicklisteners.ServiceOnClickListener
 import com.duodevloopers.fooduppartner.model.ServiceOrder
+import com.duodevloopers.fooduppartner.utility.Utility
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
 class ServiceOrderAdapter(options: FirestoreRecyclerOptions<ServiceOrder>) :
     FirestoreRecyclerAdapter<ServiceOrder, ServiceOrderAdapter.ServiceOrderViewHolder>(options) {
+
+    private val TAG = "ServiceOrderAdapter"
 
     private lateinit var onServiceOnClickListener: ServiceOnClickListener
 
@@ -29,8 +32,9 @@ class ServiceOrderAdapter(options: FirestoreRecyclerOptions<ServiceOrder>) :
         model: ServiceOrder
     ) {
 
+
         holder.id.text = model.getId()
-        holder.timestamp.text = model.getTimestamp()
+        holder.timestamp.text = Utility.formatMillisecondsIntoDate(model.getTimestamp())
         holder.page.text = String.format(
             "Page : %d", model.getPage()
         )
@@ -46,12 +50,12 @@ class ServiceOrderAdapter(options: FirestoreRecyclerOptions<ServiceOrder>) :
         if (model.isPaid()) {
             // also change bg
             holder.cost.text = String.format(
-                "%s : %s", "Paid", model.getCost()
+                "%s : %s BDT", "Paid", model.getCost()
             )
         } else {
             // also change bg
             holder.cost.text = String.format(
-                "%s : %s", "Due", model.getCost()
+                "%s : %s BDT", "Due", model.getCost()
             )
         }
 

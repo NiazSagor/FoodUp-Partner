@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity_nav_graph"
-    app:startDestination="@id/selectTypeFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/selectTypeFragment"
@@ -74,14 +74,30 @@
         android:id="@+id/homeFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_rechargeFragment"
             app:destination="@id/rechargeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_foodOrderFragment"
+            app:destination="@id/foodOrderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_serviceOrderFragment"
+            app:destination="@id/serviceOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/rechargeFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.RechargeFragment"
         android:label="fragment_recharge"
         tools:layout="@layout/fragment_recharge" />
+    <fragment
+        android:id="@+id/foodOrderFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.FoodOrderFragment"
+        android:label="fragment_food_order"
+        tools:layout="@layout/fragment_food_order" />
+    <fragment
+        android:id="@+id/serviceOrderFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.ServiceOrderFragment"
+        android:label="fragment_service_order"
+        tools:layout="@layout/fragment_service_order" />
 </navigation>

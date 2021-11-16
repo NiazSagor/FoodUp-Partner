@@ -84,5 +84,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.4.0@aar'
     implementation 'com.google.zxing:core:3.4.0'
 
+    // pdf viewer
+    implementation 'com.github.afreakyelf:Pdf-Viewer:1.0.7'
 
 }

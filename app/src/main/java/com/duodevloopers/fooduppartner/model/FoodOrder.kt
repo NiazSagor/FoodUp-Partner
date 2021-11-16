@@ -10,12 +10,18 @@ class FoodOrder(
     private var timestamp: String
 ) {
 
+    constructor() : this("", "", false, "", "", false, "")
+
     fun getBuilding(): String {
         return building
     }
 
 
-    fun getItems(): List<String> = item.split("#")
+    fun getItems(): String {
+        return item
+    }
+
+//    fun getItems(): List<String> = item.split("#")
 
     fun getCost(): String {
         return cost
@@ -34,7 +40,7 @@ class FoodOrder(
         return paid
     }
 
-    fun getTimestamp(): String {
-        return timestamp
+    fun getTimestamp(): Long {
+        return timestamp.toLong()
     }
 }

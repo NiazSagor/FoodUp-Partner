@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.clicklisteners.FoodOrderOnClickListener
 import com.duodevloopers.fooduppartner.model.FoodOrder
+import com.duodevloopers.fooduppartner.utility.Utility
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 
@@ -31,25 +32,30 @@ class FoodOrderAdapter(options: FirestoreRecyclerOptions<FoodOrder>) :
     ) {
 
         holder.id.text = model.getId()
-        holder.timestamp.text = model.getTimestamp()
+        holder.timestamp.text = Utility.formatMillisecondsIntoDate(model.getTimestamp())
 
         if (model.isPaid()) {
             // also change bg
             holder.cost.text = String.format(
-                "%s : %s", "Paid", model.getCost()
+                "%s : %s BDT", "Paid", model.getCost()
             )
         } else {
             // also change bg
             holder.cost.text = String.format(
-                "%s : %s", "Due", model.getCost()
+                "%s : %s BDT", "Due", model.getCost()
             )
         }
+
+        holder.openItems.setOnClickListener(View.OnClickListener {
+            onFoodOrderOnClickListener.onClick(model)
+        })
 
     }
 
     class FoodOrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val id: TextView = itemView.findViewById(R.id.id)
+        val openItems: TextView = itemView.findViewById(R.id.open_items)
         val timestamp: TextView = itemView.findViewById(R.id.timestamp)
         val cost: TextView = itemView.findViewById(R.id.total_cost)
     }
