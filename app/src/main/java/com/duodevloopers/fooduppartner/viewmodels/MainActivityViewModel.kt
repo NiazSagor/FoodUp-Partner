@@ -1,5 +1,6 @@
 package com.duodevloopers.fooduppartner.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.duodevloopers.fooduppartner.model.Partner
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,8 +13,9 @@ class MainActivityViewModel : ViewModel {
 
     fun set(partner: Partner) {
         this.partner = partner
-        setPartnerToDb()
     }
+
+    fun getPartner(): Partner = partner
 
     fun setType(type: String) {
         this.type = type
@@ -23,12 +25,16 @@ class MainActivityViewModel : ViewModel {
         return type
     }
 
-    private fun setPartnerToDb() {
+    fun setPartnerToDb() {
         FirebaseFirestore.getInstance()
             .collection("partner")
             .document(partner.getPhoneNumber())
             .set(partner);
     }
+
+    private var occupiedRoomByTeacher: MutableLiveData<String> = MutableLiveData<String>()
+
+    fun getOccupiedRoomByTeacher(): MutableLiveData<String> = occupiedRoomByTeacher
 
     constructor()
 }

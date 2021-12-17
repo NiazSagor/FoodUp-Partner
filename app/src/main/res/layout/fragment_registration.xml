@@ -1,108 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.RegistrationFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Register"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="16dp"
-        android:background="@android:color/darker_gray"
-        android:src="@drawable/ic_baseline_add_a_photo" />
-
-
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add a Shop Logo"
-        android:textAlignment="center" />
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white"
+        app:title="Registration"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/parent"
-        android:layout_marginTop="@dimen/loginViewsMargin">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 
-        <EditText
-            android:id="@+id/edit_text_shop_owner_name"
-            style="@style/modifiedEditText"
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Shop Owner Name"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:paddingBottom="32dp"
+            tools:context=".fragments.RegistrationFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputId"
-        style="@style/parent"
-        android:layout_marginTop="@dimen/loginViewsMargin">
-
-        <EditText
-            android:id="@+id/edit_text_shop_phone"
-            style="@style/modifiedEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Shop Phone Number"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"
+                android:background="@android:color/darker_gray"
+                android:src="@drawable/ic_baseline_add_a_photo" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/parent"
-        android:layout_marginTop="@dimen/loginViewsMargin">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add a Shop Logo"
+                android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/edit_text_shop_name"
-            style="@style/modifiedEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Shop Name"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputId"
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <EditText
+                    android:id="@+id/edit_text_shop_phone"
+                    style="@style/modifiedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Shop Phone Number"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/parent"
-        android:layout_marginTop="@dimen/loginViewsMargin">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
 
-        <EditText
-            android:id="@+id/edit_text_shop_details"
-            style="@style/modifiedEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="Shop Details"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/edit_text_shop_name"
+                    style="@style/modifiedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Shop Name"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-        android:id="@+id/button_register"
-        style="@style/loginButton"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/loginViewsMargin"
-        android:text="Register"
-        app:initialCornerAngle="27dp"
-        app:spinning_bar_color="#FFF"
-        app:spinning_bar_padding="6dp"
-        app:spinning_bar_width="4dp" />
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <EditText
+                    android:id="@+id/edit_text_shop_details"
+                    style="@style/modifiedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Shop Details"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/department_spinner"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Store Type">
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/store_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:textSize="12sp"
+                    tools:ignore="KeyboardInaccessibleWidget" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/loginViewsMargin">
+
+                <EditText
+                    android:id="@+id/edit_text_shop_owner_name"
+                    style="@style/modifiedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="Shop Owner Name"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:id="@+id/button_register"
+                style="@style/loginButton"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:text="Register"
+                app:initialCornerAngle="27dp"
+                app:spinning_bar_color="#FFF"
+                app:spinning_bar_padding="6dp"
+                app:spinning_bar_width="4dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

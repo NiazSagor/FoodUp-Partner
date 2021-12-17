@@ -87,4 +87,8 @@ dependencies {
     // pdf viewer
     implementation 'com.github.afreakyelf:Pdf-Viewer:1.0.7'
 
+    //lottie animation
+    implementation 'com.airbnb.android:lottie:3.4.2'
+
+
 }

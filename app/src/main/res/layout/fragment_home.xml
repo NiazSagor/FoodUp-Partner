@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -57,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="Orders"
+                    android:textAlignment="center"
                     android:textColor="@color/black" />
 
             </LinearLayout>
@@ -81,16 +81,51 @@
                 android:padding="16dp">
 
                 <ImageView
-                    android:padding="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
+                    android:padding="16dp"
                     android:src="@drawable/recharge" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="Create Recharge"
+                    android:text="Create\nRecharge"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:padding="12dp"
+                    android:src="@drawable/add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Add\nProduct"
+                    android:textAlignment="center"
                     android:textColor="@color/black" />
 
             </LinearLayout>
@@ -106,7 +141,19 @@
         android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white"
+        app:title="Partner Dashboard"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

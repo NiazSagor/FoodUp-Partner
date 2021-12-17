@@ -7,13 +7,17 @@
     android:orientation="vertical"
     tools:context=".fragments.CreateCrFragment">
 
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="CR Information"
-        android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white"
+        app:title="Create CR"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleTextColor="@color/white" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/parent"
@@ -89,5 +93,19 @@
         app:spinning_bar_color="#FFF"
         app:spinning_bar_padding="6dp"
         app:spinning_bar_width="4dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 
 </LinearLayout>

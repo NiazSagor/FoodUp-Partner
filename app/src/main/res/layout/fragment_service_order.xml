@@ -7,6 +7,18 @@
     android:orientation="vertical"
     tools:context=".fragments.ServiceOrderFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white"
+        app:title="Pending Orders"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
+
     <EditText
         android:id="@+id/search"
         android:layout_width="match_parent"
@@ -27,8 +39,8 @@
         android:id="@+id/order_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/service_order_layout" />
 

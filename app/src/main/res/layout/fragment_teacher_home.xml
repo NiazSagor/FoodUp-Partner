@@ -7,6 +7,17 @@
     tools:context=".fragments.TeacherHomeFragment">
 
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white"
+        app:title="Teacher Dashboard"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -14,6 +25,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/class_status_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_background_border"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <ImageView
+            android:id="@+id/class_status_image"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="3dp"
+            android:src="@drawable/circle" />
+
+        <TextView
+            android:id="@+id/class_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Class : 201"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,6 +139,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+
     </LinearLayout>
 
     <TextView
@@ -102,6 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="Dashboard"
+        android:visibility="gone"
         android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         android:textStyle="bold"

@@ -3,38 +3,36 @@ package com.duodevloopers.fooduppartner.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.duodevloopers.fooduppartner.R
+import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    private val model: MainActivityViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         create_recharge.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToRechargeFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
         }
 
-        // if service order
-        orders.setOnClickListener(View.OnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToServiceOrderFragment()
-            findNavController().navigate(action)
-        })
+        orders.setOnClickListener {
 
-        // if food order
-//        orders.setOnClickListener(View.OnClickListener {
-//            val action = HomeFragmentDirections.actionHomeFragmentToFoodOrderFragment()
-//            findNavController().navigate(action)
-//        })
+            val action = when (model.getType()) {
+                "stationery" -> HomeFragmentDirections.actionHomeFragmentToServiceOrderFragment()
+                else -> HomeFragmentDirections.actionHomeFragmentToFoodOrderFragment()
+            }
+
+            findNavController().navigate(action)
+        }
     }
 
 }

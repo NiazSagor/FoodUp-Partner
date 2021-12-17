@@ -3,16 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragments.RechargeFragment">
 
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Recharge Info"
-        android:textSize="24sp"
-        android:textColor="@color/black"
-        android:layout_margin="8dp" />
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="@color/white"
+        app:title="Recharge"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleCentered="true"
+        app:titleTextColor="@color/white" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/parent"

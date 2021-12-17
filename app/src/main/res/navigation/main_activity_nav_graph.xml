@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/selectTypeFragment">
 
     <fragment
         android:id="@+id/selectTypeFragment"
@@ -52,13 +52,16 @@
         android:id="@+id/teacherHomeFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.TeacherHomeFragment"
         android:label="fragment_teacher_home"
-        tools:layout="@layout/fragment_teacher_home" >
+        tools:layout="@layout/fragment_teacher_home">
         <action
             android:id="@+id/action_teacherHomeFragment_to_createAttendanceFragment"
             app:destination="@id/createAttendanceFragment" />
         <action
             android:id="@+id/action_teacherHomeFragment_to_createCrFragment"
             app:destination="@id/createCrFragment" />
+        <action
+            android:id="@+id/action_teacherHomeFragment_to_classRoomFragment"
+            app:destination="@id/classRoomFragment" />
     </fragment>
     <fragment
         android:id="@+id/createCrFragment"
@@ -84,6 +87,9 @@
         <action
             android:id="@+id/action_homeFragment_to_serviceOrderFragment"
             app:destination="@id/serviceOrderFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addClassroomFragment"
+            app:destination="@id/addClassroomFragment" />
     </fragment>
     <fragment
         android:id="@+id/rechargeFragment"
@@ -100,4 +106,18 @@
         android:name="com.duodevloopers.fooduppartner.fragments.ServiceOrderFragment"
         android:label="fragment_service_order"
         tools:layout="@layout/fragment_service_order" />
+    <fragment
+        android:id="@+id/classRoomFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.ClassRoomFragment"
+        android:label="ClassRoomFragment" />
+    <fragment
+        android:id="@+id/addClassroomFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.AddClassroomFragment"
+        android:label="fragment_add_classroom"
+        tools:layout="@layout/fragment_add_classroom" />
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.duodevloopers.fooduppartner.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" />
 </navigation>

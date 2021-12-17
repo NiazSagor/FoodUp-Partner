@@ -1,15 +1,12 @@
 package com.duodevloopers.fooduppartner.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.duodevloopers.fooduppartner.R
-import com.duodevloopers.fooduppartner.model.Partner
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_create_cr.*
-import kotlinx.android.synthetic.main.fragment_registration.*
 
 
 class CreateCrFragment : Fragment(R.layout.fragment_create_cr) {
@@ -41,9 +38,39 @@ class CreateCrFragment : Fragment(R.layout.fragment_create_cr) {
         ) {
             Toast.makeText(requireContext(), "Fields must not be empty", Toast.LENGTH_SHORT).show()
         } else {
-                //do database operation
-            Toast.makeText(requireContext(),"CR Created",Toast.LENGTH_SHORT).show()
+
+            animationView.visibility = View.VISIBLE
+
+            makeCr(cr_id.text.toString())
+
+            Toast.makeText(requireContext(), "CR Created", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun makeCr(id: String) {
+        FirebaseFirestore.getInstance()
+            .collection("student").whereEqualTo("id", id)
+            .get()
+            .addOnSuccessListener {
+                animationView.visibility = View.GONE
+                if (!it.isEmpty) {
+                    val doc = it.documents[0]
+                    val docData = doc.data
+                    docData?.set("type", "cr")
+                    FirebaseFirestore.getInstance()
+                        .collection("student")
+                        .document(doc.reference.id)
+                        .update(docData!!)
+                        .addOnSuccessListener {
+                            Toast.makeText(requireContext(), "CR Created", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Student not found", Toast.LENGTH_SHORT).show()
+                }
+            }.addOnFailureListener {
+                animationView.visibility = View.GONE
+            }
     }
 
 }

@@ -5,22 +5,23 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ArrayAdapter
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.duodevloopers.fooduppartner.R
-import com.duodevloopers.fooduppartner.model.Partner
+import com.duodevloopers.fooduppartner.model.FoodItem
 import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.fragment_registration.*
+import kotlinx.android.synthetic.main.fragment_add_product.*
+import kotlinx.android.synthetic.main.fragment_registration.thumbnail
 
-
-class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnClickListener {
+class AddProductFragment : Fragment(), View.OnClickListener {
 
     private val model: MainActivityViewModel by activityViewModels()
 
@@ -29,7 +30,14 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_add_product, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,73 +51,27 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
                 .start()
         }
 
-        val adapter: ArrayAdapter<String> =
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                arrayListOf("Food", "Stationery")
-            )
-
-        store_type.setAdapter(adapter)
-
-        store_type.setText(model.getType())
-
-        button_register.setOnClickListener(this)
-
+        add_food.setOnClickListener(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            uri = data?.data!!
             animationView.visibility = View.VISIBLE
+            uri = data?.data!!
             thumbnail.setImageURI(uri)
             uploadImage(uri)
         }
     }
 
-    override fun onClick(v: View?) {
-        if (edit_text_shop_details.text.toString() == ""
-            ||
-            edit_text_shop_name.text.toString() == ""
-            ||
-            edit_text_shop_owner_name.text.toString() == ""
-            ||
-            edit_text_shop_phone.text.toString() == ""
-        ) {
-            Toast.makeText(requireContext(), "Fields must not be empty", Toast.LENGTH_SHORT).show()
-        } else {
-
-            animationView.visibility = View.VISIBLE
-
-            model.set(
-                Partner(
-                    edit_text_shop_details.text.toString(),
-                    downloadUrl,
-                    edit_text_shop_name.text.toString(),
-                    edit_text_shop_owner_name.text.toString(),
-                    edit_text_shop_phone.text.toString(),
-                    model.getType()
-                )
-            )
-
-            model.setPartnerToDb()
-
-            Handler().postDelayed(Runnable {
-                animationView.visibility = View.GONE
-                findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
-            }, 1200)
-        }
-    }
-
     private fun uploadImage(uri: Uri) {
         val storageReference = FirebaseStorage.getInstance()
-            .getReference("Store Cover Image")
+            .getReference("Food Images")
 
         storageReference.putFile(uri)
             .addOnCompleteListener(OnCompleteListener {
-                animationView.visibility = View.GONE
                 if (it.isSuccessful) {
+                    animationView.visibility = View.GONE
                     downloadUrl = it.result.toString()
                 } else {
                     Toast.makeText(requireContext(), "Upload unsuccessful", Toast.LENGTH_SHORT)
@@ -123,4 +85,45 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
 
     }
 
+    override fun onClick(v: View?) {
+        if (food_name.text.toString().isEmpty() || food_desc.text.toString()
+                .isEmpty() || food_price.text.toString().isEmpty()
+        ) {
+            Toast.makeText(requireContext(), "Fields must not be empty", Toast.LENGTH_SHORT).show()
+        } else {
+
+            val foodItem = FoodItem(
+                food_name.text.toString(),
+                downloadUrl,
+                food_desc.text.toString(),
+                Integer.parseInt(food_price.text.toString()),
+                0,
+                ""
+            )
+
+            animationView.visibility = View.VISIBLE
+
+            uploadFoodToDb(foodItem)
+
+            Handler().postDelayed(Runnable {
+                animationView.visibility = View.GONE
+            }, 1200)
+        }
+    }
+
+    private fun uploadFoodToDb(foodItem: FoodItem) {
+        FirebaseFirestore.getInstance()
+            .collection("food")
+            .document()
+            .set(foodItem)
+            .addOnSuccessListener {
+                Toast.makeText(
+                    requireContext(),
+                    "Food item is added successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }.addOnFailureListener {
+                Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+            }
+    }
 }

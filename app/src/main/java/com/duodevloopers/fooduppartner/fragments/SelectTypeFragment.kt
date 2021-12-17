@@ -16,9 +16,12 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
 
     private val model: MainActivityViewModel by activityViewModels()
 
+    private lateinit var selectedUserType: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        selectedUserType = "teacher"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,41 +29,43 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
 
 
         stationary.setOnClickListener {
-            model.setType("service")
-            stationary.setBackground(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.selected
-                )
+            selectedUserType = "stationery"
+            model.setType("stationery")
+            stationary.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.selected
             )
-            restaurant.setBackground(null)
+            restaurant.background = null
         }
 
         restaurant.setOnClickListener {
+            selectedUserType = "food"
             model.setType("food")
-            restaurant.setBackground(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.selected
-                )
+            restaurant.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.selected
             )
-            stationary.setBackground(null)
+            stationary.background = null
         }
 
         teacher.setOnClickListener {
+            selectedUserType = "teacher"
             model.setType("teacher")
-            teacher.setBackground(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.selected
-                )
+            teacher.background = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.selected
             )
-            teacher.setBackground(null)
+            teacher.background = null
         }
 
         next_button.setOnClickListener {
-            val action =
-                SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()
+
+            val action = when (selectedUserType) {
+                "stationery" -> SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()
+                "food" -> SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()
+                else -> SelectTypeFragmentDirections.actionSelectTypeFragmentToTeacherLogin()
+            }
+
             findNavController().navigate(action)
         }
     }
