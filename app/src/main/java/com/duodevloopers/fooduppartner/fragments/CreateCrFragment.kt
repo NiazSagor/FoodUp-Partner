@@ -1,6 +1,8 @@
 package com.duodevloopers.fooduppartner.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,8 +21,27 @@ class CreateCrFragment : Fragment(R.layout.fragment_create_cr) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        cr_id.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s!!.length == 7) ifCr(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                //ifCr(s.toString())
+            }
+
+        })
+
         create_cr.setOnClickListener {
-            createCR()
+            if (create_cr.text.equals("Create")) {
+                createCR()
+            } else if (create_cr.text.equals("Remove CR")) {
+                makeCr(cr_id.text.toString(), false)
+            }
         }
 
     }
@@ -41,13 +62,13 @@ class CreateCrFragment : Fragment(R.layout.fragment_create_cr) {
 
             animationView.visibility = View.VISIBLE
 
-            makeCr(cr_id.text.toString())
+            makeCr(cr_id.text.toString(), true)
 
             Toast.makeText(requireContext(), "CR Created", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun makeCr(id: String) {
+    private fun makeCr(id: String, ifNewCR: Boolean) {
         FirebaseFirestore.getInstance()
             .collection("student").whereEqualTo("id", id)
             .get()
@@ -56,13 +77,14 @@ class CreateCrFragment : Fragment(R.layout.fragment_create_cr) {
                 if (!it.isEmpty) {
                     val doc = it.documents[0]
                     val docData = doc.data
-                    docData?.set("type", "cr")
+                    if (ifNewCR) docData?.set("type", "cr") else docData?.set("type", "student")
+                    val msg = if (ifNewCR) "CR Created" else "CR Removed"
                     FirebaseFirestore.getInstance()
                         .collection("student")
                         .document(doc.reference.id)
                         .update(docData!!)
                         .addOnSuccessListener {
-                            Toast.makeText(requireContext(), "CR Created", Toast.LENGTH_SHORT)
+                            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT)
                                 .show()
                         }
                 } else {
@@ -70,6 +92,29 @@ class CreateCrFragment : Fragment(R.layout.fragment_create_cr) {
                 }
             }.addOnFailureListener {
                 animationView.visibility = View.GONE
+            }
+    }
+
+    private fun ifCr(id: String) {
+        FirebaseFirestore.getInstance()
+            .collection("student")
+            .whereEqualTo("id", id)
+            .get()
+            .addOnSuccessListener {
+                if (!it.isEmpty) {
+                    val doc = it.documents[0]
+                    val docData = doc.data
+                    if (docData!!["type"] == "cr") {
+                        already_cr_text.visibility = View.VISIBLE
+                        create_cr.text = "Remove CR"
+                    } else {
+                        already_cr_text.visibility = View.GONE
+                        create_cr.text = "Create"
+                    }
+                } else {
+                    create_cr.text = "Create"
+                    already_cr_text.visibility = View.GONE
+                }
             }
     }
 

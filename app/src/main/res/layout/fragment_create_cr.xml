@@ -31,6 +31,15 @@
             android:hint="CR Id" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/already_cr_text"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:text="This id is already CR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/parent"

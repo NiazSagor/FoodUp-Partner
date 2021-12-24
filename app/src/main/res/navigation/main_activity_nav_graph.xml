@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_activity_nav_graph"
-    app:startDestination="@id/selectTypeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/selectTypeFragment"
@@ -14,8 +14,14 @@
             android:id="@+id/action_selectTypeFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
         <action
-            android:id="@+id/action_selectTypeFragment_to_teacherLogin"
-            app:destination="@id/teacherLogin" />
+            android:id="@+id/action_selectTypeFragment_to_teacherRegistration"
+            app:destination="@id/teacherRegistration" />
+        <action
+            android:id="@+id/action_selectTypeFragment_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+        <action
+            android:id="@+id/action_selectTypeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -30,24 +36,25 @@
         android:id="@+id/loginFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_selectTypeFragment"
+            app:destination="@id/selectTypeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/teacherRegistration"
         android:name="com.duodevloopers.fooduppartner.fragments.TeacherRegistration"
         android:label="teacher_registration"
-        tools:layout="@layout/teacher_registration" />
+        tools:layout="@layout/teacher_registration" >
+        <action
+            android:id="@+id/action_teacherRegistration_to_teacherHomeFragment"
+            app:destination="@id/teacherHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/teacherLogin"
         android:name="com.duodevloopers.fooduppartner.fragments.TeacherLogin"
         android:label="teacher_login"
-        tools:layout="@layout/teacher_login" >
-        <action
-            android:id="@+id/action_teacherLogin_to_teacherRegistration"
-            app:destination="@id/teacherRegistration" />
-        <action
-            android:id="@+id/action_teacherLogin_to_teacherHomeFragment"
-            app:destination="@id/teacherHomeFragment" />
-    </fragment>
+        tools:layout="@layout/teacher_login" />
     <fragment
         android:id="@+id/teacherHomeFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.TeacherHomeFragment"

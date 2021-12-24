@@ -8,6 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_select_type.*
 
 
@@ -59,15 +61,63 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
         }
 
         next_button.setOnClickListener {
+            when (selectedUserType) {
+                "food", "stationery" -> checkIfShopUserExist()
+                else -> checkIfTeacherExists()
+            }
+        }
+    }
 
-            val action = when (selectedUserType) {
-                "stationery" -> SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()
-                "food" -> SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()
-                else -> SelectTypeFragmentDirections.actionSelectTypeFragmentToTeacherLogin()
+    private fun checkIfShopUserExist() {
+
+        val number = FirebaseAuth.getInstance().currentUser?.phoneNumber
+
+        FirebaseFirestore.getInstance()
+            .collection("shops")
+            .get()
+            .addOnSuccessListener {
+                for (partner in it.documents) {
+                    if (partner["number"] == number) {
+                        findNavController().navigate(
+                            SelectTypeFragmentDirections.actionSelectTypeFragmentToHomeFragment()
+                        )
+                        return@addOnSuccessListener
+                    }
+                }
+
+                when (selectedUserType) {
+                    "stationery", "food" -> {
+                        findNavController().navigate(
+                            SelectTypeFragmentDirections.actionSelectTypeFragmentToRegistrationFragment()
+                        )
+                    }
+                }
             }
 
-            findNavController().navigate(action)
-        }
+    }
+
+    private fun checkIfTeacherExists() {
+
+        val number = FirebaseAuth.getInstance().currentUser?.phoneNumber
+
+        FirebaseFirestore.getInstance()
+            .collection("teacher")
+            .get()
+            .addOnSuccessListener {
+                for (teacher in it.documents) {
+                    if (teacher["number"] == number) {
+                        findNavController().navigate(
+                            SelectTypeFragmentDirections.actionSelectTypeFragmentToTeacherHomeFragment()
+                        )
+                        return@addOnSuccessListener
+                    }
+                }
+
+                findNavController().navigate(
+                    SelectTypeFragmentDirections.actionSelectTypeFragmentToTeacherRegistration()
+                )
+            }
+
     }
 
 
