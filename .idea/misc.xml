@@ -33,14 +33,16 @@
         <entry key="..\:/FoodUp-Partner/app/src/main/res/layout/service_order_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/FoodUp-Partner/app/src/main/res/layout/teacher_login.xml" value="0.36666666666666664" />
         <entry key="..\:/FoodUp-Partner/app/src/main/res/layout/teacher_registration.xml" value="0.33" />
+        <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_class_room.xml" value="0.1527777777777778" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_create_cr.xml" value="0.19166666666666668" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_home.xml" value="0.19166666666666668" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_login.xml" value="0.21" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_partner_home.xml" value="0.19166666666666668" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_recharge.xml" value="0.19166666666666668" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_registration.xml" value="0.19166666666666668" />
+        <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_select_type.xml" value="0.16" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/fragment_teacher_home.xml" value="0.19166666666666668" />
-        <entry key="..\:/FoodUpPartner/app/src/main/res/layout/mobile_number_bottom_sheet.xml" value="0.16" />
+        <entry key="..\:/FoodUpPartner/app/src/main/res/layout/mobile_number_bottom_sheet.xml" value="0.27684563758389263" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/teacher_login.xml" value="0.19166666666666668" />
         <entry key="..\:/FoodUpPartner/app/src/main/res/layout/teacher_registration.xml" value="0.22" />
       </map>

@@ -1,6 +1,7 @@
 package com.duodevloopers.fooduppartner.bottomsheets
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -26,6 +27,13 @@ class OTPInputBottomSheet(
     fun showBottomSheet() {
         bottomSheetDialog.setContentView(bottomSheetView)
         bottomSheetDialog.setCancelable(true)
+        submit.setOnClickListener {
+            if (number.text.toString().isNotEmpty()) {
+                Log.d("BottomSheet", "onClick: " + number.text.toString())
+                OTPInputBottomSheetInteractionCallback.onNumberSubmitted(number.text.toString())
+                hideBottomSheet()
+            }
+        }
         bottomSheetDialog.show()
     }
 
@@ -34,9 +42,7 @@ class OTPInputBottomSheet(
     override fun onClick(v: View?) {
         when (v?.id) {
             submit.id -> {
-                if (number.text.toString().isNotEmpty())
-                    OTPInputBottomSheetInteractionCallback.onNumberSubmitted(number.text.toString())
-                hideBottomSheet()
+
             }
         }
     }

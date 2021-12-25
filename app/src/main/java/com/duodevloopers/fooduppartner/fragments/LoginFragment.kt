@@ -29,6 +29,12 @@ class LoginFragment : Fragment(), OTPInputBottomSheetInteractionCallback {
 
         auth = FirebaseAuth.getInstance()
         otpInputBottomSheet = OTPInputBottomSheet(requireContext(), this)
+
+        if (auth.currentUser != null) {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToSelectTypeFragment()
+            )
+        }
     }
 
     override fun onCreateView(

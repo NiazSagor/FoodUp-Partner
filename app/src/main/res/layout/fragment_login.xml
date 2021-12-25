@@ -52,15 +52,6 @@
                 android:textSize="@dimen/newsMoreTextSize"
                 android:visibility="gone" />
 
-            <TextView
-                style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin"
-                android:text="New user? Register Now"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"

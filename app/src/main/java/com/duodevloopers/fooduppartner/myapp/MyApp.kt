@@ -19,6 +19,7 @@ class MyApp : Application() {
         lateinit var partner: Partner
 
         fun getUser() {
+
             if (FirebaseAuth.getInstance().currentUser != null) {
 
                 FirebaseFirestore.getInstance().collection("shops")

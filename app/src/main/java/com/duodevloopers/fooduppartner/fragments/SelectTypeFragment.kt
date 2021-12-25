@@ -61,6 +61,7 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
         }
 
         next_button.setOnClickListener {
+            animationView.visibility = View.VISIBLE
             when (selectedUserType) {
                 "food", "stationery" -> checkIfShopUserExist()
                 else -> checkIfTeacherExists()
@@ -78,6 +79,7 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
             .addOnSuccessListener {
                 for (partner in it.documents) {
                     if (partner["number"] == number) {
+                        animationView.visibility = View.GONE
                         findNavController().navigate(
                             SelectTypeFragmentDirections.actionSelectTypeFragmentToHomeFragment()
                         )
@@ -85,6 +87,7 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
                     }
                 }
 
+                animationView.visibility = View.GONE
                 when (selectedUserType) {
                     "stationery", "food" -> {
                         findNavController().navigate(
@@ -106,12 +109,15 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
             .addOnSuccessListener {
                 for (teacher in it.documents) {
                     if (teacher["number"] == number) {
+                        animationView.visibility = View.GONE
                         findNavController().navigate(
                             SelectTypeFragmentDirections.actionSelectTypeFragmentToTeacherHomeFragment()
                         )
                         return@addOnSuccessListener
                     }
                 }
+
+                animationView.visibility = View.GONE
 
                 findNavController().navigate(
                     SelectTypeFragmentDirections.actionSelectTypeFragmentToTeacherRegistration()
