@@ -27,9 +27,9 @@ class MainActivityViewModel : ViewModel {
 
     fun setPartnerToDb() {
         FirebaseFirestore.getInstance()
-            .collection("partner")
+            .collection("shops")
             .document(partner.getPhoneNumber())
-            .set(partner);
+            .set(partner)
     }
 
     private var occupiedRoomByTeacher: MutableLiveData<String> = MutableLiveData<String>()

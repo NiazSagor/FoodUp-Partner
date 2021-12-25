@@ -94,7 +94,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
 
             model.setPartnerToDb()
 
-            Handler().postDelayed(Runnable {
+            Handler().postDelayed({
                 animationView.visibility = View.GONE
                 findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
             }, 1200)
@@ -106,7 +106,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
             .getReference("Store Cover Image")
 
         storageReference.putFile(uri)
-            .addOnCompleteListener({
+            .addOnCompleteListener {
                 animationView.visibility = View.GONE
                 if (it.isSuccessful) {
                     downloadUrl = it.result.toString()
@@ -114,7 +114,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
                     Toast.makeText(requireContext(), "Upload unsuccessful", Toast.LENGTH_SHORT)
                         .show()
                 }
-            })
+            }
             .addOnFailureListener(OnFailureListener {
                 animationView.visibility = View.GONE
                 Toast.makeText(requireContext(), "Upload unsuccessful", Toast.LENGTH_SHORT).show()
