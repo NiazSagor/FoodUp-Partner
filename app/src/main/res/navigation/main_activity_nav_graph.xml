@@ -27,28 +27,34 @@
         android:id="@+id/registrationFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/main_activity_nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.duodevloopers.fooduppartner.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_selectTypeFragment"
-            app:destination="@id/selectTypeFragment" />
+            app:destination="@id/selectTypeFragment"
+            app:popUpTo="@id/main_activity_nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/teacherRegistration"
         android:name="com.duodevloopers.fooduppartner.fragments.TeacherRegistration"
         android:label="teacher_registration"
-        tools:layout="@layout/teacher_registration" >
+        tools:layout="@layout/teacher_registration">
         <action
             android:id="@+id/action_teacherRegistration_to_teacherHomeFragment"
-            app:destination="@id/teacherHomeFragment" />
+            app:destination="@id/teacherHomeFragment"
+            app:popUpTo="@id/main_activity_nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/teacherLogin"
@@ -124,7 +130,7 @@
         tools:layout="@layout/fragment_add_classroom" />
     <fragment
         android:id="@+id/addProductFragment"
-        android:name="com.duodevloopers.fooduppartner.AddProductFragment"
+        android:name="com.duodevloopers.fooduppartner.fragments.AddProductFragment"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
 </navigation>

@@ -14,7 +14,6 @@ import androidx.navigation.fragment.findNavController
 import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.model.Partner
 import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_registration.*
@@ -107,7 +106,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
             .getReference("Store Cover Image")
 
         storageReference.putFile(uri)
-            .addOnCompleteListener(OnCompleteListener {
+            .addOnCompleteListener({
                 animationView.visibility = View.GONE
                 if (it.isSuccessful) {
                     downloadUrl = it.result.toString()

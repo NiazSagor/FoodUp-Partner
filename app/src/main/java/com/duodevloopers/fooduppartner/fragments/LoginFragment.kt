@@ -58,6 +58,12 @@ class LoginFragment : Fragment(), OTPInputBottomSheetInteractionCallback {
                 val number = "+88" + binding.editTextPhone.text.toString()
                 sendVerificationCode(number)
 
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Please provide a valid phone number",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
         }
@@ -99,7 +105,6 @@ class LoginFragment : Fragment(), OTPInputBottomSheetInteractionCallback {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     binding.animationView.visibility = View.GONE
-                    val user = auth.currentUser
                     Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_selectTypeFragment)
                 } else {
