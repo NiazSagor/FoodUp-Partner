@@ -11,6 +11,10 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            getUser()
+        }
     }
 
     companion object {
@@ -19,19 +23,14 @@ class MyApp : Application() {
 
         fun getUser() {
 
-            if (FirebaseAuth.getInstance().currentUser != null) {
-
-                FirebaseFirestore.getInstance().collection("shops")
-                    .document(FirebaseAuth.getInstance().currentUser?.phoneNumber.toString())
-                    .get()
-                    .addOnSuccessListener {
-                        if (it.exists()) {
-                            partner = it.toObject(Partner::class.java)!!
-                        }
+            FirebaseFirestore.getInstance().collection("shops")
+                .document(FirebaseAuth.getInstance().currentUser?.phoneNumber.toString())
+                .get()
+                .addOnSuccessListener {
+                    if (it.exists()) {
+                        partner = it.toObject(Partner::class.java)!!
                     }
-
-
-            }
+                }
         }
 
     }

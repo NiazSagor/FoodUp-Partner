@@ -5,11 +5,8 @@ class Partner(
     var image: String,
     var name: String,
     var ownerName: String,
-    private var phoneNumber: String,
+    var phoneNumber: String,
     var type: String
 ) {
 
-    fun getPhoneNumber(): String {
-        return phoneNumber
-    }
 }

@@ -14,6 +14,7 @@ import com.duodevloopers.fooduppartner.adapter.ServiceOrderAdapter
 import com.duodevloopers.fooduppartner.callbacks.ShopLoadCallback
 import com.duodevloopers.fooduppartner.clicklisteners.ServiceOnClickListener
 import com.duodevloopers.fooduppartner.model.ServiceOrder
+import com.duodevloopers.fooduppartner.myapp.MyApp
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -40,7 +41,7 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
 
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document("Stationary Shop 1")
+            .document(MyApp.partner.phoneNumber)
             .get()
             .addOnSuccessListener(OnSuccessListener {
                 shopLoadCallback.onSuccess(it.reference)

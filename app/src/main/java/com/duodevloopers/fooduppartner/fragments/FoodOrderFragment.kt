@@ -13,6 +13,7 @@ import com.duodevloopers.fooduppartner.callbacks.OrderDetailsBottomSheetInteract
 import com.duodevloopers.fooduppartner.callbacks.ShopLoadCallback
 import com.duodevloopers.fooduppartner.clicklisteners.FoodOrderOnClickListener
 import com.duodevloopers.fooduppartner.model.FoodOrder
+import com.duodevloopers.fooduppartner.myapp.MyApp
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
@@ -39,7 +40,7 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document("q3Uvg4piInWxRBC8ChrC")
+            .document(MyApp.partner.phoneNumber)
             .get()
             .addOnSuccessListener(OnSuccessListener {
                 shopLoadCallback.onSuccess(it.reference)
