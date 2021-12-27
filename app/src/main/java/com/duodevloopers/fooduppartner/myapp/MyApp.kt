@@ -19,7 +19,7 @@ class MyApp : Application() {
 
     companion object {
 
-        lateinit var partner: Partner
+        var partner: Partner? = null
 
         fun getUser() {
 

@@ -28,7 +28,7 @@ class MainActivityViewModel : ViewModel {
     fun setPartnerToDb() {
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document(partner.getPhoneNumber())
+            .document(partner.phoneNumber)
             .set(partner)
     }
 

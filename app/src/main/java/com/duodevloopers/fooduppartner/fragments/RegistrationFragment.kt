@@ -15,6 +15,7 @@ import com.duodevloopers.fooduppartner.R
 import com.duodevloopers.fooduppartner.model.Partner
 import com.duodevloopers.fooduppartner.viewmodels.MainActivityViewModel
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_registration.*
 
@@ -48,6 +49,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayListOf("Food", "Stationery")
             )
+
+        edit_text_shop_phone.setText(FirebaseAuth.getInstance().currentUser?.phoneNumber)
 
         store_type.setAdapter(adapter)
 
@@ -87,7 +90,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration), View.OnCl
                     downloadUrl,
                     edit_text_shop_name.text.toString(),
                     edit_text_shop_owner_name.text.toString(),
-                    edit_text_shop_phone.text.toString(),
+                    FirebaseAuth.getInstance().currentUser?.phoneNumber.toString(),
                     model.getType()
                 )
             )

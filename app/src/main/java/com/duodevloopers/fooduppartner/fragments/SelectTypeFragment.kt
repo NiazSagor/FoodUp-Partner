@@ -78,7 +78,7 @@ class SelectTypeFragment : Fragment(R.layout.fragment_select_type) {
             .get()
             .addOnSuccessListener {
                 for (partner in it.documents) {
-                    if (partner["number"] == number) {
+                    if (partner["phoneNumber"] == number) {
                         animationView.visibility = View.GONE
                         findNavController().navigate(
                             SelectTypeFragmentDirections.actionSelectTypeFragmentToHomeFragment()

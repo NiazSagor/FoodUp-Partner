@@ -40,7 +40,7 @@ class FoodOrderFragment : Fragment(), ShopLoadCallback, OrderDetailsBottomSheetI
 
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document(MyApp.partner.phoneNumber)
+            .document(MyApp.partner?.phoneNumber.toString())
             .get()
             .addOnSuccessListener(OnSuccessListener {
                 shopLoadCallback.onSuccess(it.reference)

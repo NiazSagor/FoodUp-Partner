@@ -41,7 +41,7 @@ class ServiceOrderFragment : Fragment(), ShopLoadCallback, ServiceOnClickListene
 
         FirebaseFirestore.getInstance()
             .collection("shops")
-            .document(MyApp.partner.phoneNumber)
+            .document(MyApp.partner?.phoneNumber.toString())
             .get()
             .addOnSuccessListener(OnSuccessListener {
                 shopLoadCallback.onSuccess(it.reference)
